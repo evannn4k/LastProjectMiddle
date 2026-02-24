@@ -11,15 +11,14 @@
     {{-- main css --}}
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
-    {{-- tailwind --}}
-    @vite('resources/css/app.css')
-    @vite('resources/js/app.js')
+    {{-- tailwind/flowbite --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
     @yield('main')
 
-    @if (session('success'))
+    {{-- @if (session('success'))
         <script>
             Swal.fire({
                 title: 'Berhasil!',
@@ -37,7 +36,9 @@
                 icon: 'error',
             });
         </script>
-    @endif
+    @endif --}}
+
+    @stack('scripts')
 
     <script src="{{ asset("assets/js/main.js") }}"></script>
 </body>

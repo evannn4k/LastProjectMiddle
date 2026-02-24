@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("game_id")->constrained("games")->onDelete("cascade");
             $table->string("name");
-            $table->string("slug")->unique();
-            $table->foreignId("category_id")->constrained("categories")->onDelete("cascade");
-            $table->string("region");
-            $table->string("publisher");
+            $table->enum("type", ["diamond", "skin", "weekly_membership", "monthly_membership", "weekly_diamond_pass"]);
+            $table->integer("amount");
+            $table->integer("price");
+            $table->integer("stock");
             $table->boolean("is_active")->default(true);
-            $table->text("description");
-            $table->string("image");
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('products');
     }
 };
