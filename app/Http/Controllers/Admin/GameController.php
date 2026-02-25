@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Game\GameStatusUpdateRequest;
 use App\Models\Game;
+use App\Service\Admin\GameService;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -11,9 +13,23 @@ class GameController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    protected $gameService;
+
+    public function __construct(GameService $gameService)
+    {
+        $this->gameService = $gameService;
+    }
+
     public function index()
     {
-        $games = Game::all();
+        $key = request()->get('s') ?? null;
+
+        if ($key) {
+            $games = Game::where('name', 'LIKE', '%'.$key.'%')->get();
+        } else {
+            $games = Game::all();
+        }
 
         return view('content.admin.game.index', compact('games'));
     }
@@ -64,5 +80,16 @@ class GameController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function status(Game $game)
+    {
+        $game = $this->gameService->updateStatus($game);
+
+        if($game) {
+            return redirect()->route('admin.game.index')->with('success', 'Berhasil mengubah status game');
+        } else {
+            return redirect()->route('admin.game.index')->with('error', 'Gagal mengubah status game');
+        }
     }
 }

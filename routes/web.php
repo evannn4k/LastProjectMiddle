@@ -1,10 +1,12 @@
 <?php
 
 // admin
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\LandingPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,15 @@ Route::middleware('auth:admin')
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
         Route::resource('game', GameController::class);
+        Route::controller(GameController::class)->group(function() {
+            Route::get("/game/search", "index")->name("game.search");
+            Route::patch("/game/status/{game}/update", "status")->name("game.status");
+        });
+
+        Route::resource('category', CategoryController::class);
+        Route::controller(CategoryController::class)->group(function() {
+            Route::get("/category/search", "index")->name("category.search");
+        });
 
         Route::resource('user', UserController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::controller(UserController::class)->group(function () {

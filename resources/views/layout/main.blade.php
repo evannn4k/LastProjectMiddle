@@ -18,29 +18,33 @@
 <body>
     @yield('main')
 
-    {{-- @if (session('success'))
+    @if (session('success'))
         <script>
-            Swal.fire({
-                title: 'Berhasil!',
-                text: "{{ session('success') }}",
-                icon: 'success',
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Berhasil!',
+                    text: "{{ session('success') }}",
+                    icon: 'success',
+                });
             });
         </script>
     @endif
 
     @if (session('error'))
         <script>
-            Swal.fire({
-                title: 'Error!',
-                text: "{{ session('error') }}",
-                icon: 'error',
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    title: 'Error!',
+                    text: "{{ session('error') }}",
+                    icon: 'error',
+                });
             });
         </script>
-    @endif --}}
+    @endif
 
     @stack('scripts')
 
-    <script src="{{ asset("assets/js/main.js") }}"></script>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
 
 </html>

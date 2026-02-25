@@ -4,7 +4,7 @@ namespace App\Service\Admin;
 
 use App\Models\User;
 
-class UserServices
+class UserService
 {
     /**
      * Create a new class instance.
@@ -16,7 +16,9 @@ class UserServices
 
     public function createUser(array $data)
     {
-        User::create($data);
+        $user = User::create($data);
+
+        return $user;
     }
 
     public function updateUser($user, array $data)
@@ -26,10 +28,14 @@ class UserServices
         }
 
         $user->update($data);
+
+        return $user;
     }
 
     public function deleteUser($user)
     {
         $user->delete();
+
+        return $user;
     }
 }

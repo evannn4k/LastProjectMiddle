@@ -5,8 +5,8 @@
         <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
             <div class="p-4 flex items-start justify-between space-x-4 border-b border-default">
                 <div class="flex flex-col">
-                    <span class="text-2xl font-semibold">Tabel game</span>
-                    <span class="text-sm">Halaman untuk mengelola data game</span>
+                    <span class="text-2xl font-semibold">Tabel Kategori</span>
+                    <span class="text-sm">Halaman untuk mengelola data kategori</span>
                 </div>
 
                 <button type="button" data-modal-target="create" data-modal-toggle="create"
@@ -16,12 +16,11 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M5 12h14m-7 7V5" />
                     </svg>
-                    Tambah Game
+                    Tambah Kategori
                 </button>
-
             </div>
             <div class="p-4 flex items-center justify-between space-x-4">
-                <form action="{{ route('admin.game.search') }}" method="GET">
+                <form action="{{ route('admin.category.search') }}" method="GET">
                     @csrf
                     <label for="input-group-1" class="sr-only">Search</label>
                     <div class="relative">
@@ -86,22 +85,13 @@
                                 #
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
+                                Gambar
+                            </th>
+                            <th scope="col" class="px-6 py-3 font-medium">
                                 Nama
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
-                                Region
-                            </th>
-                            <th scope="col" class="px-6 py-3 font-medium">
-                                Publisher
-                            </th>
-                            <th scope="col" class="px-6 py-3 font-medium">
                                 Ditambahkan Pada
-                            </th>
-                            <th scope="col" class="px-6 py-3 font-medium">
-                                Aktif
-                            </th>
-                            <th scope="col" class="px-6 py-3 font-medium">
-                                Detail
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
                                 Action
@@ -109,51 +99,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($games->sortByDesc("created_at") as $game)
+                        @forelse ($categories->sortByDesc("created_at") as $category)
                             <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                                 <td class="w-4 p-4">
                                     {{ $loop->iteration }}
                                 </td>
-                                <td class="px-6 py-4">
-                                    {{ $game->name }}
-                                    </th>
-                                <td class="px-6 py-4">
-                                    {{ $game->region }}
+                                <td class="w-4 p-4">
+                                    <img src="{{ asset("storage/images/category/$category->default_image") }}"
+                                        alt="{{ $category->name }}" class="max-h-8">
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $game->publisher }}
+                                    {{ $category->name }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    {{ $game->created_at->diffForHumans() }}
-                                </td>
-                                <td class="px-6 py-4">
-
-                                    <form action="{{ route('admin.game.status', $game) }}" method="POST">
-                                        @csrf
-                                        @method('PATCH')
-                                        <label class="inline-flex items-center cursor-pointer">
-                                            <input type="checkbox" class="sr-only peer"
-                                                {{ $game->is_active == true ? 'checked' : '' }}>
-                                            <button type="submit"
-                                                class="relative w-9 h-5 bg-neutral-quaternary peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-soft dark:peer-focus:ring-brand-soft rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand">
-                                            </button>
-                                        </label>
-                                    </form>
-
-                                </td>
-                                <td class="px-6 py-4">
-                                    <a href=""
-                                        class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full text-xs px-3 py-1.5 focus:outline-none">
-                                        Detail</a>
+                                    {{ $category->created_at->diffForHumans() }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="flex gap-3">
 
-
-                                        <button type="button" data-id="{{ $game->id }}"
-                                            data-name="{{ $game->name }}" data-email="{{ $game->email }}"
-                                            data-phone="{{ $game->phone }}" data-role="{{ $game->role }}"
-                                            data-modal-target="update" data-modal-toggle="update"
+                                        <button type="button" data-id="{{ $category->id }}"
+                                            data-name="{{ $category->name }}" data-modal-target="update" data-modal-toggle="update"
                                             class="font-medium text-green-600 hover:underline flex items-center update">
                                             <svg class="w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -163,7 +128,7 @@
                                             </svg>
                                             Edit</button>
 
-                                        <form action="{{ route('admin.game.destroy', $game) }}" method="post">
+                                        <form action="{{ route('admin.category.destroy', $category) }}" method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button
@@ -184,7 +149,7 @@
                             <tr>
                                 <td colspan="7"
                                     class="text-center bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium py-3">
-                                    Tidak ada data game</td>
+                                    Tidak ada data kategori</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -200,7 +165,7 @@
             <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
                 <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
                     <h3 class="text-lg font-medium text-heading">
-                        Tambah game
+                        Tambah kategori
                     </h3>
                     <button type="button"
                         class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
@@ -213,11 +178,11 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.game.store') }}" method="POST">
+                <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="grid gap-4 grid-cols-2 py-4 md:py-6">
 
-                        <div class="col-span-2 sm:col-span-1">
+                        <div class="col-span-2">
                             <label for="name" class="block mb-2.5 text-sm font-medium text-heading">Nama</label>
                             <input type="text" name="name" id="name"
                                 class="
@@ -227,7 +192,7 @@
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
                         @enderror
                                 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="nama game">
+                                placeholder="nama kategori">
                             @error('name')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
@@ -235,99 +200,38 @@
                             @enderror
                         </div>
 
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email</label>
-                            <input type="email" name="email" id="email"
-                                class="
-                                @error('email')
-                                bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                                @else
-                                bg-neutral-secondaary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                                @enderror
-                                w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="contoh@gmail.com">
-                            @error('email')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
                         <div class="col-span-2">
-                            <label for="phone" class="block mb-2.5 text-sm font-medium text-heading">Nomor HP
-                                (optional)</label>
-                            <input type="number" name="phone" id="phone"
-                                class="
-                            @error('number')
+                            <label for="default_image"
+                                class="block mb-2.5 text-sm font-medium text-heading">Gambar</label>
+
+                            <div class="flex items-center justify-center w-full">
+                                <label for="default_image"
+                                    class="flex flex-col items-center justify-center w-full h-64 @error('default_image')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                            @else
+                        @else
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                            @enderror
-                            block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="081234567890">
-                            @error('number')
+                        @enderror">
+                                    <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
+                                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2" />
+                                        </svg>
+                                        <p class="mb-2 text-sm"><span class="font-semibold">Click to upload</span> or drag
+                                            and drop</p>
+                                        <p class="text-xs">jepg,jpg,png,jfif,webp,gif,svg (MAX. 2040kb)</p>
+                                    </div>
+                                    <input id="default_image" name="default_image" type="file" class="hidden" />
+                                </label>
+                            </div>
+                            @error('default_image')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
                                 </p>
                             @enderror
                         </div>
 
-                        <div class="col-span-2">
-                            <label for="role" class="block mb-2.5 text-sm font-medium text-heading">Peran</label>
-                            <select id="role" name="role"
-                                class="block w-full px-3 py-2.5 
-                                @error('span')
-                            bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                            @else
-                            bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                        @enderror
-                                px-3 py-2.5 shadow-xs placeholder:text-body">
-                                <option value="game">game</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                            @error('span')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
-                        <div class="col-span-2">
-                            <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Password</label>
-                            <input type="password" name="password" id="password"
-                                class="
-                                @error('password')
-                                bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                                @else
-                                bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                                @enderror
-                                block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="••••••••">
-                            @error('password')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
-                        <div class="col-span-2">
-                            <label for="password_confirmation"
-                                class="block mb-2.5 text-sm font-medium text-heading">Password</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation"
-                                class="
-                                @error('password_confirmation')
-                                bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                                @else
-                                bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                                @enderror
-                                block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="••••••••">
-                        </div>
-                        @error('password_confirmation')
-                            <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                {{ $message }}
-                            </p>
-                        @enderror
                     </div>
                     <div class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6">
                         <button type="submit"
@@ -339,7 +243,7 @@
                                 <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
                                     d="M8 4h8v4H8V4Zm7 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                             </svg>
-                            Tambah game
+                            Tambah kategori
                         </button>
                         <button data-modal-hide="create" type="button"
                             class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Cancel</button>
@@ -356,7 +260,7 @@
             <div class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6">
                 <div class="flex items-center justify-between border-b border-default pb-4 md:pb-5">
                     <h3 class="text-lg font-medium text-heading">
-                        Edit game
+                        Edit kategori
                     </h3>
                     <button type="button"
                         class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
@@ -369,13 +273,13 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <form action="" method="POST" id="formUpdate">
+                <form method="POST" enctype="multipart/form-data" id="formUpdate">
                     @csrf
-                    @method('PUT')
+                    @method("put")
                     <div class="grid gap-4 grid-cols-2 py-4 md:py-6">
 
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="name" class="block mb-2.5 text-sm font-medium text-heading">Nama</label>
+                        <div class="col-span-2">
+                            <label for="name_update" class="block mb-2.5 text-sm font-medium text-heading">Nama</label>
                             <input type="text" name="name" id="name_update"
                                 class="
                                 @error('name')
@@ -384,7 +288,7 @@
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
                         @enderror
                                 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="nama game">
+                                placeholder="nama kategori">
                             @error('name')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
@@ -392,99 +296,38 @@
                             @enderror
                         </div>
 
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email</label>
-                            <input type="email" name="email" id="email_update"
-                                class="
-                                @error('email')
-                                bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                                @else
-                                bg-neutral-secondaary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                                @enderror
-                                w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="contoh@gmail.com">
-                            @error('email')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
                         <div class="col-span-2">
-                            <label for="phone" class="block mb-2.5 text-sm font-medium text-heading">Nomor HP
-                                (optional)</label>
-                            <input type="number" name="phone" id="phone_update"
-                                class="
-                            @error('number')
+                            <label for="default_image_update"
+                                class="block mb-2.5 text-sm font-medium text-heading">Ganti Gambar</label>
+
+                            <div class="flex items-center justify-center w-full">
+                                <label for="default_image_update"
+                                    class="flex flex-col items-center justify-center w-full h-64 @error('default_image')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                            @else
+                        @else
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                            @enderror
-                            block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="081234567890">
-                            @error('number')
+                        @enderror">
+                                    <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
+                                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2" />
+                                        </svg>
+                                        <p class="mb-2 text-sm"><span class="font-semibold">Click to upload</span> or drag
+                                            and drop</p>
+                                        <p class="text-xs">jepg,jpg,png,jfif,webp,gif,svg (MAX. 2040kb)</p>
+                                    </div>
+                                    <input id="default_image_update" name="default_image" type="file" class="hidden" />
+                                </label>
+                            </div>
+                            @error('default_image')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
                                 </p>
                             @enderror
                         </div>
 
-                        <div class="col-span-2">
-                            <label for="role" class="block mb-2.5 text-sm font-medium text-heading">Peran</label>
-                            <select id="role_update" name="role"
-                                class="block w-full px-3 py-2.5 
-                                @error('span')
-                            bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                            @else
-                            bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                        @enderror
-                                px-3 py-2.5 shadow-xs placeholder:text-body">
-                                <option value="game" class="role">game</option>
-                                <option value="admin" class="role">Admin</option>
-                            </select>
-                            @error('span')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
-                        <div class="col-span-2">
-                            <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Password</label>
-                            <input type="password" name="password" id="password_update"
-                                class="
-                                @error('password')
-                                bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                                @else
-                                bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                                @enderror
-                                block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="••••••••">
-                            @error('password')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
-                        <div class="col-span-2">
-                            <label for="password_confirmation_update"
-                                class="block mb-2.5 text-sm font-medium text-heading">Password</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation_update"
-                                class="
-                                @error('password_confirmation')
-                                bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                                @else
-                                bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                                @enderror
-                                block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="••••••••">
-                            @error('password_confirmation')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
                     </div>
                     <div class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6">
                         <button type="submit"
@@ -496,7 +339,6 @@
                                 <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
                                     d="M8 4h8v4H8V4Zm7 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                             </svg>
-
                             Simpan Perubahan
                         </button>
                         <button data-modal-hide="update" type="button"
@@ -511,22 +353,11 @@
 @push('scripts')
     <script>
         document.querySelectorAll(".update").forEach(btn =>
-                btn.addEventListener("click", function() {
-                    document.getElementById("name_update").value = btn.dataset.name;
-                    document.getElementById("email_update").value = btn.dataset.email;
-                    document.getElementById("phone_update").value = btn.dataset.phone;
-                    // document.getElementById("role_update").value = btn.dataset.role;
+            btn.addEventListener("click", function() {
+                document.getElementById("name_update").value = btn.dataset.name;
 
-                    document.querySelectorAll(".role").forEach(option => {
-                        if (option.value == btn.dataset.role) {
-                            option.selected = true;
-                        } else {
-                            option.selected = false;
-                        }
-                    })
-
-                    document.getElementById("formUpdate").action = `/admin/game/${btn.dataset.id}`;
-                })
-            )
+                document.getElementById("formUpdate").action = `/admin/category/${btn.dataset.id}`;
+            })
+        )
     </script>
 @endpush

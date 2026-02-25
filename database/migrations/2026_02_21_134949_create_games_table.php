@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("slug")->unique();
-            $table->foreignId("category_id")->constrained("categories")->onDelete("cascade");
             $table->string("region");
             $table->string("publisher");
             $table->boolean("is_active")->default(true);

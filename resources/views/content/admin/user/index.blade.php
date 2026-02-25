@@ -507,12 +507,12 @@
                                 @enderror
                                 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="••••••••">
+                                @error('password_confirmation')
+                                    <p class="mt-2.5 text-sm text-fg-danger-strong">
+                                        {{ $message }}
+                                    </p>
+                                @enderror
                         </div>
-                        @error('password_confirmation')
-                            <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                {{ $message }}
-                            </p>
-                        @enderror
                     </div>
                     <div class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6">
                         <button type="submit"

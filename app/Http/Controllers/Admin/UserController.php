@@ -6,15 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\User\UserCreateRequest;
 use App\Http\Requests\Admin\User\UserUpdateRequest;
 use App\Models\User;
-use App\Service\Admin\UserServices;
+use App\Service\Admin\UserService;
 
 class UserController extends Controller
 {
-    protected $userServices;
+    protected $userService;
 
-    public function __construct(UserServices $userServices)
+    public function __construct(UserService $userService)
     {
-        $this->userServices = $userServices;
+        $this->userService = $userService;
     }
 
     /**
@@ -49,7 +49,7 @@ class UserController extends Controller
      */
     public function store(UserCreateRequest $request)
     {
-        $user = $this->userServices->createUser($request->validated());
+        $user = $this->userService->createUser($request->validated());
 
         if ($user) {
             return redirect()->route('admin.user.index')->with('success', 'Berhasil menambah data pengguna');
@@ -80,7 +80,7 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        $user = $this->userServices->updateUser($user, $request->validated());
+        $user = $this->userService->updateUser($user, $request->validated());
 
         if ($user) {
             return redirect()->route('admin.user.index')->with('success', 'Berhasil mengubah data pengguna');
@@ -94,7 +94,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user = $this->userServices->deleteUser($user);
+        $user = $this->userService->deleteUser($user);
 
         if ($user) {
             return redirect()->route('admin.user.index')->with('success', 'Berhasil mengubah data pengguna');
