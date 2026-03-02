@@ -34,7 +34,7 @@ class CategoryService
     public function updateCategory($data, $category)
     {
         if (isset($data['default_image'])) {
-            $filename = $this->saveImageAction->save($data['default_image'], $this->path, $category);
+            $filename = $this->saveImageAction->save($data['default_image'], $this->path, $category->default_image);
 
             $data['default_image'] = $filename;
         } else {

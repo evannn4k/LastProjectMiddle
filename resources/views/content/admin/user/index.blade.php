@@ -16,70 +16,13 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M5 12h14m-7 7V5" />
                     </svg>
-                    Tambah Game
+                    Tambah Pengguna
                 </button>
 
             </div>
-            <div class="p-4 flex items-center justify-between space-x-4">
-                <form action="{{ route('admin.user.search') }}" method="GET">
-                    @csrf
-                    <label for="input-group-1" class="sr-only">Search</label>
-                    <div class="relative">
-                        <button class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none z-10">
-                            <svg class="w-4 h-4 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                            </svg>
-                        </button>
-                        <input type="text" id="s" name="s"
-                            class="block w-full max-w-96 ps-9 pe-3 py-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
-                            placeholder="Search">
-                    </div>
-                </form>
-                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                    class="shrink-0 inline-flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none"
-                    type="button">
-                    <svg class="w-4 h-4 me-1.5 -ms-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                            d="M18.796 4H5.204a1 1 0 0 0-.753 1.659l5.302 6.058a1 1 0 0 1 .247.659v4.874a.5.5 0 0 0 .2.4l3 2.25a.5.5 0 0 0 .8-.4v-7.124a1 1 0 0 1 .247-.659l5.302-6.059c.566-.646.106-1.658-.753-1.658Z" />
-                    </svg>
-                    Filter by
-                    <svg class="w-4 h-4 ms-1.5 -me-0.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        fill="none" viewBox="0 0 24 24">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m19 9-7 7-7-7" />
-                    </svg>
-                </button>
-                <div id="dropdown"
-                    class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-32">
-                    <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
-                        <li>
-                            <a href="#"
-                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Color</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Category</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Price</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Sign
-                                out</a>
-                        </li>
-                    </ul>
-                </div>
 
-
-
-            </div>
-            <div class="relative overflow-x-auto">
-                <table class="w-full text-sm text-left rtl:text-right text-body">
+            <div class="p-4 relative overflow-x-auto">
+                <table id="main-table" class="w-full text-sm text-left rtl:text-right text-body">
                     <thead class="text-sm text-body bg-neutral-secondary-medium border-b border-t border-default-medium">
                         <tr>
                             <th scope="col" class="p-4">
@@ -140,15 +83,15 @@
                                 <td class="px-6 py-4">
                                     <div class="flex gap-3">
 
-                                        <button type="button" data-id="{{ $user->id }}"
-                                            data-name="{{ $user->name }}" data-email="{{ $user->email }}"
-                                            data-phone="{{ $user->phone }}" data-role="{{ $user->role }}"
-                                            data-modal-target="update" data-modal-toggle="update"
+                                        <button type="button" data-id="{{ $user->id }}" data-name="{{ $user->name }}"
+                                            data-email="{{ $user->email }}" data-phone="{{ $user->phone }}"
+                                            data-role="{{ $user->role }}" data-modal-target="update"
+                                            data-modal-toggle="update"
                                             class="font-medium text-green-600 hover:underline flex items-center update">
                                             <svg class="w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2"
                                                     d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                             </svg>
                                             Edit</button>
@@ -180,44 +123,6 @@
                     </tbody>
                 </table>
             </div>
-
-            {{-- pagination --}}
-            {{-- <nav class="flex items-center flex-column flex-wrap md:flex-row justify-between p-4"
-                    aria-label="Table navigation">
-                    <span class="text-sm font-normal text-body mb-4 md:mb-0 block w-full md:inline md:w-auto">Showing <span
-                            class="font-semibold text-heading">1-10</span> of <span
-                            class="font-semibold text-heading">1000</span></span>
-                    <ul class="flex -space-x-px text-sm">
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-s-base text-sm px-3 h-9 focus:outline-none">Previous</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">1</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">2</a>
-                        </li>
-                        <li>
-                            <a href="#" aria-current="page"
-                                class="flex items-center justify-center text-fg-brand bg-brand-softer box-border border border-default-medium hover:bg-brand-soft hover:text-fg-brand font-medium text-sm w-9 h-9 focus:outline-none">3</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">...</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium text-sm w-9 h-9 focus:outline-none">5</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading font-medium rounded-e-base text-sm px-3 h-9 focus:outline-none">Next</a>
-                        </li>
-                    </ul>
-                </nav> --}}
         </div>
     </div>
 
@@ -233,8 +138,8 @@
                     <button type="button"
                         class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
                         data-modal-hide="create">
-                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            fill="none" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18 17.94 6M18 18 6.06 6" />
                         </svg>
@@ -267,12 +172,12 @@
                             <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email</label>
                             <input type="email" name="email" id="email"
                                 class="
-                                @error('email')
-                                bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                                @else
-                                bg-neutral-secondaary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                                @enderror
-                                w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+                               @error('email')
+                            bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
+                        @else
+                            bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
+                        @enderror
+                                block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="contoh@gmail.com">
                             @error('email')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
@@ -286,14 +191,14 @@
                                 (optional)</label>
                             <input type="number" name="phone" id="phone"
                                 class="
-                            @error('number')
+                            @error('phone')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
                             @else
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
                             @enderror
                             block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="081234567890">
-                            @error('number')
+                            @error('phone')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
                                 </p>
@@ -304,7 +209,7 @@
                             <label for="role" class="block mb-2.5 text-sm font-medium text-heading">Peran</label>
                             <select id="role" name="role"
                                 class="block w-full px-3 py-2.5 
-                                @error('span')
+                                @error('role')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
                             @else
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
@@ -313,7 +218,7 @@
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
                             </select>
-                            @error('span')
+                            @error('role')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
                                 </p>
@@ -443,14 +348,14 @@
                                 (optional)</label>
                             <input type="number" name="phone" id="phone_update"
                                 class="
-                            @error('number')
+                            @error('phone')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
                             @else
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
                             @enderror
                             block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="081234567890">
-                            @error('number')
+                            @error('phone')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
                                 </p>
@@ -461,7 +366,7 @@
                             <label for="role" class="block mb-2.5 text-sm font-medium text-heading">Peran</label>
                             <select id="role_update" name="role"
                                 class="block w-full px-3 py-2.5 
-                                @error('span')
+                                @error('role')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
                             @else
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
@@ -470,7 +375,7 @@
                                 <option value="user" class="role">User</option>
                                 <option value="admin" class="role">Admin</option>
                             </select>
-                            @error('span')
+                            @error('role')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
                                 </p>
@@ -507,11 +412,11 @@
                                 @enderror
                                 block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="••••••••">
-                                @error('password_confirmation')
-                                    <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                        {{ $message }}
-                                    </p>
-                                @enderror
+                            @error('password_confirmation')
+                                <p class="mt-2.5 text-sm text-fg-danger-strong">
+                                    {{ $message }}
+                                </p>
+                            @enderror
                         </div>
                     </div>
                     <div class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6">
@@ -538,23 +443,23 @@
 
 @push('scripts')
     <script>
-        document.querySelectorAll(".update").forEach(btn =>
-            btn.addEventListener("click", function() {
-                document.getElementById("name_update").value = btn.dataset.name;
-                document.getElementById("email_update").value = btn.dataset.email;
-                document.getElementById("phone_update").value = btn.dataset.phone;
-                // document.getElementById("role_update").value = btn.dataset.role;
+        document.addEventListener("click", function(e) {
+            const btn = e.target.closest(".update");
+            if (!btn) return;
+            document.getElementById("name_update").value = btn.dataset.name;
+            document.getElementById("email_update").value = btn.dataset.email;
+            document.getElementById("phone_update").value = btn.dataset.phone;
+            // document.getElementById("role_update").value = btn.dataset.role;
 
-                document.querySelectorAll(".role").forEach(option => {
-                    if (option.value == btn.dataset.role) {
-                        option.selected = true;
-                    } else {
-                        option.selected = false;
-                    }
-                })
-
-                document.getElementById("formUpdate").action = `/admin/user/${btn.dataset.id}`;
+            document.querySelectorAll(".role").forEach(option => {
+                if (option.value == btn.dataset.role) {
+                    option.selected = true;
+                } else {
+                    option.selected = false;
+                }
             })
-        )
+
+            document.getElementById("formUpdate").action = `/admin/user/${btn.dataset.id}`;
+        });
     </script>
 @endpush

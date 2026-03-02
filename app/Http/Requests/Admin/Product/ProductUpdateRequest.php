@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Category;
+namespace App\Http\Requests\Admin\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class CategoryUpdateRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,13 @@ class CategoryUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|max:255",
-            "default_image" => "nullable|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048"
+            "name" => "nullable|string|max:255",
+            "amount" => "required|numeric",
+            "price" => "required|numeric",
+            "category_id" => "required|exists:categories,id",
+            "stock" => "required|numeric",
+            "image" => "nullable|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048",
+            "is_active" => "required|in:0,1"
         ];
     }
 }

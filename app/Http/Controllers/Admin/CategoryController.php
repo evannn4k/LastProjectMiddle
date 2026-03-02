@@ -24,13 +24,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $key = request()->get('s') ?? null;
-
-        if ($key) {
-            $categories = Category::where('name', 'LIKE', '%'.$key.'%')->get();
-        } else {
-            $categories = Category::all();
-        }
+        $categories = Category::all();
 
         return view('content.admin.category.index', compact('categories'));
     }
@@ -57,7 +51,7 @@ class CategoryController extends Controller
             return redirect()->route('admin.category.index')->with('error', 'Gagal menambah data kategori');
         }
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -65,7 +59,7 @@ class CategoryController extends Controller
     {
         //
     }
-    
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -73,28 +67,28 @@ class CategoryController extends Controller
     {
         //
     }
-    
+
     /**
      * Update the specified resource in storage.
      */
     public function update(CategoryUpdateRequest $request, Category $category)
     {
         $category = $this->categoryService->updateCategory($request->validated(), $category);
-    
+
         if ($category) {
             return redirect()->route('admin.category.index')->with('success', 'Berhasil mengubah data kategori');
         } else {
             return redirect()->route('admin.category.index')->with('error', 'Gagal mengubah data kategori');
         }
     }
-    
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Category $category)
     {
         $category = $this->categoryService->deleteCategory($category);
-    
+
         if ($category) {
             return redirect()->route('admin.category.index')->with('success', 'Berhasil menghapus data kategori');
         } else {

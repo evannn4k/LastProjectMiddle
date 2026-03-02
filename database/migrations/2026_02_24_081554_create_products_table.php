@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("game_id")->constrained("games")->onDelete("cascade");
             $table->foreignId("category_id")->constrained("categories")->onDelete("cascade");
-            $table->string("name");
+            $table->string("name")->nullable();
             $table->integer("amount");
             $table->integer("price");
             $table->integer("stock");

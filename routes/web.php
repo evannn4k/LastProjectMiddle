@@ -4,6 +4,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GameController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
@@ -30,19 +31,16 @@ Route::middleware('auth:admin')
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
-        Route::resource('game', GameController::class);
-        Route::controller(GameController::class)->group(function() {
-            Route::get("/game/search", "index")->name("game.search");
+        Route::resource('game', GameController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
+        Route::controller(GameController::class)->group(function () {
             Route::patch("/game/status/{game}/update", "status")->name("game.status");
         });
 
         Route::resource('category', CategoryController::class);
-        Route::controller(CategoryController::class)->group(function() {
-            Route::get("/category/search", "index")->name("category.search");
-        });
+        Route::controller(CategoryController::class)->group(function () {});
 
         Route::resource('user', UserController::class)->only(['index', 'store', 'update', 'destroy']);
-        Route::controller(UserController::class)->group(function () {
-            Route::get('/user/search/', 'index')->name('user.search');
-        });
+        Route::controller(UserController::class)->group(function () {});
+        
+        Route::resource('product', ProductController::class)->only(['index', 'store', 'update', 'destroy']);
     });

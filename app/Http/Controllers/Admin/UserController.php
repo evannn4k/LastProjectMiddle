@@ -22,16 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $key = request()->get('s') ?? null;
-
-        if ($key) {
-            $users = User::where('name', 'LIKE', '%'.$key.'%')
-                ->orWhere('email', 'LIKE', '%'.$key.'%')
-                ->orWhere('phone', 'LIKE', '%'.$key.'%')
-                ->get();
-        } else {
-            $users = User::all();
-        }
+        $users = User::all();
 
         return view('content.admin.user.index', compact('users'));
     }
@@ -56,7 +47,6 @@ class UserController extends Controller
         } else {
             return redirect()->route('admin.user.index')->with('error', 'Gagal menambah data pengguna');
         }
-
     }
 
     /**

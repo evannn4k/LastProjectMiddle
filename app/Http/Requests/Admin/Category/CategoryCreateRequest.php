@@ -24,7 +24,7 @@ class CategoryCreateRequest extends FormRequest
     {
         return [
             "name" => "required|string|max:255",
-            "default_image" => "required|image|mimes:jepg,jpg,png,jfif,webp,gif,svg|max:2048"
+            "default_image" => "required|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048"
         ];
     }
 }

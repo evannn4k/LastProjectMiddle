@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Game;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class GameUpdateRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class GameUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return (Auth::guard('admin')->check()) ? true : false;
     }
 
     /**
@@ -22,7 +23,12 @@ class GameUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => "required|string|max:255",
+            "region" => "required|string|max:255",
+            "publisher" => "required|string|max:255",
+            "is_active" => "required|in:0,1",
+            "description" => "required|string",
+            "image" => "nullable|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048"
         ];
     }
 }

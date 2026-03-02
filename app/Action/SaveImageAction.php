@@ -9,13 +9,12 @@ class SaveImageAction
     /**
      * Create a new class instance.
      */
-    public function save($file, $path, $model = null)
+    public function save($file, $path, $oldImage = null)
     {
-        if($model) {
+        if($oldImage) {
             $filename = time() ."-". $file->getClientOriginalName();
             
-            // dd($path . $model->default_image);
-            Storage::delete($path . $model->default_image);
+            Storage::delete($path . $oldImage);
             $file->storeAs($path, $filename);
         } else {
             $filename = time() ."-". $file->getClientOriginalName();

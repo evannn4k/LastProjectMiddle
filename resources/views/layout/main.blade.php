@@ -11,7 +11,7 @@
     {{-- main css --}}
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 
-    {{-- tailwind/flowbite --}}
+    {{-- css/js vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -43,6 +43,9 @@
     @endif
 
     @stack('scripts')
+
+    {{-- datatables --}}
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
 
     <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>
