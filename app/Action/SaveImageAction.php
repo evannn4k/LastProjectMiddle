@@ -13,7 +13,6 @@ class SaveImageAction
     {
         if($oldImage) {
             $filename = time() ."-". $file->getClientOriginalName();
-            
             Storage::delete($path . $oldImage);
             $file->storeAs($path, $filename);
         } else {

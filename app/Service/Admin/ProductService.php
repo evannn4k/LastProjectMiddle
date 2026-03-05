@@ -37,7 +37,7 @@ class ProductService
             $data["image"] = $filename;
         } else {
             unset($data["image"]);
-        }
+        }   
 
         $product->update($data);
         return $product;

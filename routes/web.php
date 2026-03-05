@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(LandingPageController::class)->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/{slug}', 'detail')->name('game.detail');
 });
 
 Route::controller(AuthController::class)->group(function () {

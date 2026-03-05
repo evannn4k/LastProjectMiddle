@@ -21,15 +21,6 @@
                 </a>
             </div>
             <div class="p-4">
-@if ($errors->any())
-    <div class="mb-4 p-4 text-red-700 bg-red-100 rounded-lg">
-        <ul class="list-disc ps-5">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
                 <div class="grid grid-cols-3 gap-4">
                     <div class="col-span-3 md:col-span-1">
                         <img src="{{ asset('storage/images/game/' . $game->image) }}" alt="{{ $game->name }}"
@@ -89,7 +80,7 @@
                                                     @csrf
                                                     @method('PATCH')
                                                     <label class="inline-flex items-center cursor-pointer">
-                                                        <input type="checkbox" class="sr-only peer"
+                                                        <input name="status" type="checkbox" class="sr-only peer"
                                                             {{ $game->is_active == true ? 'checked' : '' }}>
                                                         <button type="submit"
                                                             class="relative w-9 h-5 bg-neutral-quaternary peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-soft dark:peer-focus:ring-brand-soft rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand">
@@ -241,11 +232,9 @@
                                                 data-stock="{{ $product->stock }}"
                                                 data-category="{{ $product->category->name }}"
                                                 data-image="
-                                                @if (isset($product->image)) 
-                                                    {{ asset('storage/images/product/' . $product->image) }} 
+                                                @if (isset($product->image)) {{ asset('storage/images/product/' . $product->image) }} 
                                                 @else
-                                                    {{ asset('storage/images/category/' . $product->category->default_image) }} 
-                                                @endif
+                                                    {{ asset('storage/images/category/' . $product->category->default_image) }} @endif
                                                 "
                                                 data-created_at="{{ $product->created_at->diffForHumans() }}"
                                                 data-modal-target="preview" data-modal-toggle="preview"
@@ -316,7 +305,7 @@
                         <tbody>
                             <tr class="bg-neutral-primary border-b border-default">
                                 <td scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                                    Nama game
+                                    Nama produk
                                 </td>
                                 <td class="py-4" style="width: 10px">
                                     :
@@ -500,8 +489,7 @@
                         </div>
 
                         <div class="col-span-2 md:col-span-1">
-                            <label for="is_active_update"
-                                class="block mb-2.5 text-sm font-medium text-heading">Status</label>
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Status</label>
                             <div class="grid gap-2 grid-cols-2">
 
                                 <div
@@ -512,10 +500,10 @@
                                     bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
                                     @enderror
                                     px-3 py-2.5 shadow-xs placeholder:text-body">
-                                    <input id="active_update" name="is_active" type="radio" value="1"
+                                    <input id="active_create_product" name="is_active" type="radio" value="1"
                                         name="bordered-radio"
                                         class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border border-default appearance-none">
-                                    <label for="active"
+                                    <label for="active_create_product"
                                         class="w-full py-4 select-none ms-2 text-sm font-medium text-heading">Aktif</label>
                                 </div>
                                 <div
@@ -526,10 +514,10 @@
                                     bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
                                     @enderror
                                     px-3 py-2.5 shadow-xs placeholder:text-body">
-                                    <input id="non_active_update" name="is_active" type="radio" value="0"
+                                    <input id="non_active_create_product" name="is_active" type="radio" value="0"
                                         name="bordered-radio"
                                         class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border border-default appearance-none">
-                                    <label for="non_active_update"
+                                    <label for="non_active_create_product"
                                         class="w-full py-4 select-none ms-2 text-sm font-medium text-heading">Tidak
                                         Aktif</label>
                                 </div>
@@ -575,7 +563,7 @@
                                 mengambil gambar dari kategori</label>
 
                             <div class="flex items-center justify-center w-full">
-                                <label for="image"
+                                <label for="product_image_create"
                                     class="flex flex-col items-center justify-center w-full h-64 @error('image')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
                         @else
@@ -592,7 +580,7 @@
                                             and drop</p>
                                         <p class="text-xs">jepg,jpg,png,jfif,webp,gif,svg (MAX. 2040kb)</p>
                                     </div>
-                                    <input id="image" name="image" type="file" class="hidden" />
+                                    <input id="product_image_create" name="image" type="file" class="hidden" />
                                 </label>
                             </div>
                             @error('image')
@@ -648,8 +636,9 @@
                     <input type="hidden" name="game_id" value="{{ $game->id }}">
                     <div class="grid gap-4 grid-cols-2 py-4 md:py-6">
                         <div class="col-span-2 md:col-span-1">
-                            <label for="name_update" class="block mb-2.5 text-sm font-medium text-heading">Nama</label>
-                            <input type="text" name="name" id="name_update"
+                            <label for="product_name_update"
+                                class="block mb-2.5 text-sm font-medium text-heading">Nama</label>
+                            <input type="text" name="name" id="product_name_update"
                                 class="
                             @error('name')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
@@ -724,8 +713,7 @@
                         </div>
 
                         <div class="col-span-2 md:col-span-1">
-                            <label for="is_active_update"
-                                class="block mb-2.5 text-sm font-medium text-heading">Status</label>
+                            <label class="block mb-2.5 text-sm font-medium text-heading">Status</label>
                             <div class="grid gap-2 grid-cols-2">
 
                                 <div
@@ -799,7 +787,7 @@
                                 mengambil gambar dari kategori</label>
 
                             <div class="flex items-center justify-center w-full">
-                                <label for="image"
+                                <label for="product_image_update"
                                     class="flex flex-col items-center justify-center w-full h-64 @error('image')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
                         @else
@@ -816,7 +804,7 @@
                                             and drop</p>
                                         <p class="text-xs">jepg,jpg,png,jfif,webp,gif,svg (MAX. 2040kb)</p>
                                     </div>
-                                    <input id="image" name="image" type="file" class="hidden" />
+                                    <input id="product_image_update" name="image" type="file" class="hidden" />
                                 </label>
                             </div>
                             @error('image')
@@ -847,6 +835,7 @@
     </div>
 
     {{-- update game --}}
+
     <div id="update" tabindex="-1"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative p-4 w-full max-w-3xl max-h-full">
@@ -1014,6 +1003,7 @@
                                     </div>
                                     <input id="image" name="image" type="file" class="hidden" />
                                 </label>
+
                             </div>
                             @error('image')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
@@ -1067,7 +1057,7 @@
             const btn = e.target.closest(".updateProduct");
             if (!btn) return;
 
-            document.getElementById("name_update").value = btn.dataset.name;
+            document.getElementById("product_name_update").value = btn.dataset.name;
             document.getElementById("amount_update").value = btn.dataset.amount;
             document.getElementById("price_update").value = btn.dataset.price;
             document.getElementById("stock_update").value = btn.dataset.stock;

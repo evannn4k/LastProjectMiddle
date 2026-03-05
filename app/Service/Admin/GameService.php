@@ -43,7 +43,7 @@ class GameService
             $filename = $this->saveImageAction->save($data["image"], $this->path, $game->image);
             $data["image"] = $filename;
         }
-
+        // dd($data);
         $slug = $this->generateSlugAction->generate($data["name"], Game::class, $game['id']);
         $data["slug"] = $slug;
 

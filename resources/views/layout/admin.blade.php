@@ -18,7 +18,7 @@
                         </button>
                         <a href="{{ route('admin.dashboard') }}" class="flex ms-2 md:me-24">
                             <img src="{{ asset('assets/images/logo.png') }}" class="h-6 me-3" alt="FlowBite Logo" />
-                            <span class="self-center text-lg font-semibold whitespace- text-dark">Toko Topup</span>
+                            <span class="self-center text-lg font-semibold whitespace- text-dark">VanStore</span>
                         </a>
                     </div>
                     <div class="flex items-center">
@@ -133,7 +133,7 @@
                     </li>
                 </ul>
                 <div class="text-body pt-4 pb-2 ps-1 font-semibold">Lain-lain</div>
-                <ul class="space-y-2 font-medium">
+                {{-- <ul class="space-y-2 font-medium">
                     <li>
                         <a href="#"
                             class="flex items-center px-2 py-1.5 text-body rounded-base hover:bg-neutral-tertiary hover:text-fg-brand group">
@@ -187,7 +187,7 @@
                             <span class="flex-1 ms-3 whitespace-nowrap">Sign In</span>
                         </a>
                     </li>
-                </ul>
+                </ul> --}}
             </div>
         </aside>
 

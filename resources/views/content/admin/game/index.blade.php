@@ -37,6 +37,12 @@
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
                                 <span class="flex gap-1">
+                                    Gambar
+                                </span>
+
+                            </th>
+                            <th scope="col" class="px-6 py-3 font-medium">
+                                <span class="flex gap-1">
                                     Nama
                                     <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                         width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -98,6 +104,10 @@
                             <tr class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
                                 <td class="w-4 p-4">
                                     {{ $loop->iteration }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <img src="{{ asset('storage/images/game/' . $game->image) }}"
+                                        alt="{{ $game->name }}" class="max-h-10 object-cover rounded">
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $game->name }}
@@ -342,7 +352,7 @@
                             <label for="image" class="block mb-2.5 text-sm font-medium text-heading">Gambar</label>
 
                             <div class="flex items-center justify-center w-full">
-                                <label for="image_update"
+                                <label for="image"
                                     class="flex flex-col items-center justify-center w-full h-64 @error('image')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
                         @else
@@ -359,7 +369,7 @@
                                             and drop</p>
                                         <p class="text-xs">jepg,jpg,png,jfif,webp,gif,svg (MAX. 2040kb)</p>
                                     </div>
-                                    <input id="image_update" name="image" type="file" class="hidden" />
+                                    <input id="image" name="image" type="file" class="hidden" />
                                 </label>
                             </div>
                             @error('image')
@@ -538,7 +548,7 @@
                                 Gambar</label>
 
                             <div class="flex items-center justify-center w-full">
-                                <label for="image"
+                                <label for="image_update"
                                     class="flex flex-col items-center justify-center w-full h-64 @error('image')
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
                         @else
@@ -555,7 +565,7 @@
                                             and drop</p>
                                         <p class="text-xs">jepg,jpg,png,jfif,webp,gif,svg (MAX. 2040kb)</p>
                                     </div>
-                                    <input id="image" name="image" type="file" class="hidden" />
+                                    <input id="image_update" name="image" type="file" class="hidden" />
                                 </label>
                             </div>
                             @error('image')
