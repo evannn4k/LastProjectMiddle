@@ -7,13 +7,18 @@ use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Controller;
+
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User\LandingPageController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(LandingPageController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/{slug}', 'detail')->name('game.detail');
+    Route::get('/game/{slug}', 'detail')->name('game.detail');
+});
+
+Route::controller(OrderController::class)->group(function () {
+    Route::post('/order', 'order')->name('order');
 });
 
 Route::controller(AuthController::class)->group(function () {
@@ -42,6 +47,6 @@ Route::middleware('auth:admin')
 
         Route::resource('user', UserController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::controller(UserController::class)->group(function () {});
-        
+
         Route::resource('product', ProductController::class)->only(['index', 'store', 'update', 'destroy']);
     });

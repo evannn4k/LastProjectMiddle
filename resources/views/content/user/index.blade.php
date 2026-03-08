@@ -4,7 +4,7 @@
     <section id="hero">
         <div style="background-image: url('{{ asset('assets/images/hero2.png') }}');" class="bg-cover bg-center">
             <div class="bg-gradient-to-t from-white via-white/30 to-white/20 w-full h-full">
-                <div class="container mx-auto px-4 max-w-screen-xl">
+                <div class="container mx-auto md:px-4 max-w-screen-xl">
                     <div class="md:p-20">
                         <div id="indicators-carousel" class="relative w-full" data-carousel="static">
                             <!-- Carousel wrapper -->
@@ -85,10 +85,9 @@
                             style="background-image: url('{{ asset("storage/images/game/$game->image") }}');">
 
                         </div>
-                        <div class="p-3 flex flex-col items-start">
-                            <h5 class="text-xs md:text-lg font-semibold tracking-tight text-heading">{{ $game->name }}
-                            </h5>
-                            <p class="text-body text-[0.625rem] md:text-sm">{{ $game->publisher }}</p>
+                        <div class="px-2 py-1 flex flex-col items-center">
+                            <h5 class="text-xs md:text-lg font-semibold tracking-tight text-heading">{{ $game->name }}</h5>
+                            {{-- <p class="text-body text-[0.625rem] md:text-sm">{{ $game->publisher }}</p> --}}
                         </div>
                     </a>
                 @empty

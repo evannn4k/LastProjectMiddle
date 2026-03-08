@@ -171,7 +171,7 @@
                 <ul class="select-none grid w-full gap-4 grid-cols-2 md:grid-cols-4">
                     @forelse ($game->product as $product)
                         <li>
-                            <label for="react-option"
+                            <label
                                 class="inline-flex items-center justify-between w-full p-3 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer peer-checked:hover:bg-brand-softer peer-checked:border-brand-subtle peer-checked:bg-brand-softer hover:bg-neutral-secondary-medium peer-checked:text-fg-brand-strong">
                                 <div class="w-full flex justify-between items-center gap-2">
                                     <div class="">

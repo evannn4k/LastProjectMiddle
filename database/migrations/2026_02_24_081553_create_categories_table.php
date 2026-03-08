@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("default_image");
+            $table->boolean("priority")->default(false);
             $table->timestamps();
         });
     }

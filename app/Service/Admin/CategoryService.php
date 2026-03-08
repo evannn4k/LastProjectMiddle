@@ -41,6 +41,10 @@ class CategoryService
             unset($data["default_image"]);
         }
 
+        if(empty($data["priority"])) {
+            $data["priority"] = 0;
+        }
+
         $category->update($data);
 
         return $category;

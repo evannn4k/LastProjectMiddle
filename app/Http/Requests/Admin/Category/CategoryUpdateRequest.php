@@ -24,7 +24,8 @@ class CategoryUpdateRequest extends FormRequest
     {
         return [
             "name" => "required|string|max:255",
-            "default_image" => "nullable|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048"
+            "default_image" => "nullable|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048",
+            "priority" => "nullable|in:0,1",
         ];
     }
 }

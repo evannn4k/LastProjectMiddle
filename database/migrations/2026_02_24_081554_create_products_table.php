@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string("name")->nullable();
             $table->integer("amount");
             $table->integer("price");
-            $table->integer("stock");
             $table->string("image")->nullable();
             $table->boolean("is_active")->default(true);
             $table->timestamps();

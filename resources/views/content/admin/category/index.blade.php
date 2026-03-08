@@ -61,7 +61,7 @@
                                     <div class="flex gap-3">
 
                                         <button type="button" data-id="{{ $category->id }}"
-                                            data-name="{{ $category->name }}" data-modal-target="update"
+                                            data-name="{{ $category->name }}" data-priority="{{ $category->priority }}" data-modal-target="update"
                                             data-modal-toggle="update"
                                             class="font-medium text-green-600 hover:underline flex items-center update">
                                             <svg class="w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@
                             bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
                         @else
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                        @enderror">
+                            @enderror">
                                     <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
                                         <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -176,7 +176,23 @@
                             @enderror
                         </div>
 
+                        <div class="col-span-2 ">
+                            <label for="priority" class="block mb-2.5 text-sm font-medium text-heading">Prioritas</label>
+                            <div class="flex items-center mb-4">
+                                <input id="priority" name="priority" type="checkbox" value="1"
+                                    class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
+                                <label for="priority"
+                                    class="select-none ms-2 text-sm font-medium text-heading">Proritaskan
+                                    kategori</label>
+                            </div>
+                            @error('priority')
+                                <p class="mt-2.5 text-sm text-fg-danger-strong">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
                     </div>
+
                     <div class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6">
                         <button type="submit"
                             class="inline-flex items-center  text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
@@ -273,6 +289,22 @@
                             @enderror
                         </div>
 
+                        <div class="col-span-2 ">
+                            <label for="priority_update" class="block mb-2.5 text-sm font-medium text-heading">Prioritas</label>
+                            <div class="flex items-center mb-4">
+                                <input id="priority_update" name="priority" type="checkbox" value="1"
+                                    class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
+                                <label for="priority"
+                                    class="select-none ms-2 text-sm font-medium text-heading">Proritaskan
+                                    kategori</label>
+                            </div>
+                            @error('priority')
+                                <p class="mt-2.5 text-sm text-fg-danger-strong">
+                                    {{ $message }}
+                                </p>
+                            @enderror
+                        </div>
+
                     </div>
                     <div class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6">
                         <button type="submit"
@@ -293,7 +325,6 @@
             </div>
         </div>
     </div>
-    
 @endsection
 
 @push('scripts')
@@ -302,6 +333,7 @@
             const btn = e.target.closest(".update");
             if (!btn) return;
             document.getElementById("name_update").value = btn.dataset.name;
+            document.getElementById("priority_update").checked = btn.dataset.priority === "1" ? true : false;
 
             document.getElementById("formUpdate").action = `/admin/category/${btn.dataset.id}`;
         });

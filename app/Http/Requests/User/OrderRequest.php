@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Admin\Category;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class CategoryCreateRequest extends FormRequest
+class OrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return (Auth::guard('admin')->check()) ? true : false;
+        return true;
     }
 
     /**
@@ -23,9 +22,10 @@ class CategoryCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string|max:255",
-            "default_image" => "required|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048",
-            "priority" => "nullable|in:0,1",
+            "id_account" => "required|numeric",
+            "product_id" => "required|numeric",
+            "quantity" => "required|",
+            "no" => "nullable|numeric",
         ];
     }
 }
