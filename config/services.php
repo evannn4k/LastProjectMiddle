@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'flip' => [
+        'secret' => env('FLIP_SECRET_KEY'),
+        'base_url' => env('FLIP_BASE_URL'),
+    ]
 ];

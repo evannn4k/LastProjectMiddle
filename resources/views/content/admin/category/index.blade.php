@@ -34,6 +34,9 @@
                                 Nama
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
+                                Prioritas
+                            </th>
+                            <th scope="col" class="px-6 py-3 font-medium">
                                 Ditambahkan Pada
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
@@ -53,6 +56,13 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $category->name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    @if ($category->priority == true)
+                                    <span class="bg-brand-softer border border-brand-subtle text-fg-brand-strong text-xs font-medium px-1.5 py-0.5 rounded-full">Prioritas</span>
+                                    @else
+                                    <span class="bg-danger-soft border border-danger-subtle text-fg-danger-strong text-xs font-medium px-1.5 py-0.5 rounded-full">Bukan Prioritas</span>
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">
                                     {{ $category->created_at->diffForHumans() }}

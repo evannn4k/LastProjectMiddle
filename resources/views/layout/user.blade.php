@@ -50,11 +50,11 @@
                         </li>
                         <li>
                             <a href="#"
-                                class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:hover:bg-transparent">Tentang</a>
+                                class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:hover:bg-transparent">Riwayat Transaksi</a>
                         </li>
                     @endif
                     <li>
-                        <a href="#"
+                        <a href="{{ route('message') }}"
                             class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:hover:bg-transparent">Kontak</a>
                     </li>
                 </ul>

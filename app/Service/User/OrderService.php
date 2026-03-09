@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\User;
 
 use App\Models\Order;
 use App\Models\Product;
@@ -8,10 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function create(array $data)
+     public function create(array $data)
     {
         $product = Product::findOrFail($data["product_id"]);
         $nameProduct = $product->name ?? $product->amount . $product->category->name;
@@ -20,7 +17,7 @@ class OrderService
         $title = $nameProduct . " " . $product->game->name . " " . $invoice_number;
         $finalPrice = $product->price * $data["quantity"];
 
-        $secret_key = "Basic " . base64_encode("JDJ5JDEzJHdISW81M1lEYmIySmtDQTVjSmZmdWUzOTlhUnV5NXhpcTJNYzhXM2Rob3Q0bElYblBBMkpT" . ":");
+        $secret_key = "Basic " . base64_encode(config('services.flip.secret') . ":");
 
         $payload = json_encode([
             "title" => $title,
@@ -34,7 +31,7 @@ class OrderService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://bigflip.id/big_sandbox_api/v2/pwf/bill',
+            CURLOPT_URL => config('services.flip.base_url'),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
