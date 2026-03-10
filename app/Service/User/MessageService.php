@@ -21,19 +21,4 @@ class MessageService
 
         return $message;
     }
-
-    public function readMessage($message)
-    {
-        $message->already_read = true;
-        $message->save();
-
-        return $message;
-    }
-
-    public function readAllMessage()
-    {
-        $message = Message::where("already_read", false)->update(["already_read" => true]);
-
-        return $message;
-    }
 }

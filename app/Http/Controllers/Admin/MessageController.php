@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Message;
-use App\Service\User\MessageService;
+use App\Service\Admin\MessageService;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller

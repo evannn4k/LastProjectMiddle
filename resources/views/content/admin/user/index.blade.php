@@ -29,19 +29,54 @@
                                 #
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
-                                Nama
+                                <span class="flex gap-1">
+                                    Nama
+                                    <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                    </svg>
+                                </span>
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
-                                Email
+                                <span class="flex gap-1">
+                                    Email
+                                    <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                    </svg>
+                                </span>
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
-                                Peran
+                                <span class="flex gap-1">
+                                    Peran
+                                    <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                    </svg>
+                                </span>
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
-                                Nomor
+                                <span class="flex gap-1">
+                                    Nomor
+                                    <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                    </svg>
+                                </span>
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
-                                Daftar Pada
+                                <span class="flex gap-1">
+                                    Daftar pada
+                                    <svg class="w-4 h-4 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4" />
+                                    </svg>
+                                </span>
                             </th>
                             <th scope="col" class="px-6 py-3 font-medium">
                                 Action
@@ -83,15 +118,15 @@
                                 <td class="px-6 py-4">
                                     <div class="flex gap-3">
 
-                                        <button type="button" data-id="{{ $user->id }}" data-name="{{ $user->name }}"
-                                            data-email="{{ $user->email }}" data-phone="{{ $user->phone }}"
-                                            data-role="{{ $user->role }}" data-modal-target="update"
-                                            data-modal-toggle="update"
+                                        <button type="button" data-id="{{ $user->id }}"
+                                            data-name="{{ $user->name }}" data-email="{{ $user->email }}"
+                                            data-phone="{{ $user->phone }}" data-role="{{ $user->role }}"
+                                            data-modal-target="update" data-modal-toggle="update"
                                             class="font-medium text-green-600 hover:underline flex items-center update">
                                             <svg class="w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                 width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2"
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
                                                     d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
                                             </svg>
                                             Edit</button>
@@ -138,8 +173,8 @@
                     <button type="button"
                         class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
                         data-modal-hide="create">
-                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                            viewBox="0 0 24 24">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18 17.94 6M18 18 6.06 6" />
                         </svg>

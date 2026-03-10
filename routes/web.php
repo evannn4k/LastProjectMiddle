@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GameController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\OrderController as AdminOrder;
 use App\Http\Controllers\Admin\MessageController as AdminMessage;
 
 use App\Http\Controllers\Auth\AuthController;
@@ -64,4 +65,6 @@ Route::middleware('auth:admin')
             Route::patch("/message/read/{message}", "read")->name("message.read");
             Route::patch("/message/read/all", "readAll")->name("message.read.all");
         });
+
+        Route::resource('order', AdminOrder::class)->only(['index', 'show', 'destroy']);
     });
