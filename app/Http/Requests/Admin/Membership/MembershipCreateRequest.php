@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\Product;
+namespace App\Http\Requests\Admin\Membership;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class ProductCreateRequest extends FormRequest
+class MembershipCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,12 @@ class ProductCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "nullable|string|max:255",
-            "amount" => "required|numeric",
-            "price" => "required|numeric",
-            "game_id" => "required|exists:games,id",
-            "category_id" => "required|exists:categories,id",
-            "stock" => "required|numeric",
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'duration' => 'required|numeric',
+            'discount' => 'required|numeric',
+            'description' => 'required|string',
             "image" => "required|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048",
-            "is_active" => "required|in:0,1"
         ];
     }
 }

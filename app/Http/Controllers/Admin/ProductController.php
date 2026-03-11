@@ -87,9 +87,9 @@ class ProductController extends Controller
         $product = $this->productService->deleteProduct($product);
 
         if($product) {
-            return redirect()->back()->with('success', 'Berhasil menghapus data produk');
+            return redirect()->route("admin.product.index")->with('success', 'Berhasil menghapus data produk');
         } else {
-            return redirect()->back()->with('error', 'Gagal menghapus data produk');
+            return redirect()->route("admin.product.index")->with('error', 'Gagal menghapus data produk');
         }
     }
 }

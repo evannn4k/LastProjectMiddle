@@ -46,9 +46,9 @@ class CategoryController extends Controller
         $category = $this->categoryService->createCategory($request->validated());
 
         if ($category) {
-            return redirect()->route('admin.category.index')->with('success', 'Berhasil menambah data kategori');
+            return redirect()->back()->with('success', 'Berhasil menambah data kategori');
         } else {
-            return redirect()->route('admin.category.index')->with('error', 'Gagal menambah data kategori');
+            return redirect()->back()->with('error', 'Gagal menambah data kategori');
         }
     }
 
@@ -76,9 +76,9 @@ class CategoryController extends Controller
         $category = $this->categoryService->updateCategory($request->validated(), $category);
 
         if ($category) {
-            return redirect()->route('admin.category.index')->with('success', 'Berhasil mengubah data kategori');
+            return redirect()->back()->with('success', 'Berhasil mengubah data kategori');
         } else {
-            return redirect()->route('admin.category.index')->with('error', 'Gagal mengubah data kategori');
+            return redirect()->back()->with('error', 'Gagal mengubah data kategori');
         }
     }
 
@@ -90,9 +90,9 @@ class CategoryController extends Controller
         $category = $this->categoryService->deleteCategory($category);
 
         if ($category) {
-            return redirect()->route('admin.category.index')->with('success', 'Berhasil menghapus data kategori');
+            return redirect()->route("admin.category.index")->with('success', 'Berhasil menghapus data kategori');
         } else {
-            return redirect()->route('admin.category.index')->with('error', 'Gagal menghapus data kategori');
+            return redirect()->route("admin.category.index")->with('error', 'Gagal menghapus data kategori');
         }
     }
 }

@@ -4,6 +4,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GameController;
+use App\Http\Controllers\Admin\MembershipController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\OrderController as AdminOrder;
@@ -46,6 +47,8 @@ Route::middleware('auth:admin')
     ->name('admin.')
     ->group(function () {
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+        
+        Route::resource('membership', MembershipController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
 
         Route::resource('game', GameController::class)->only(['index', 'show', 'store', 'update', 'destroy']);
         Route::controller(GameController::class)->group(function () {

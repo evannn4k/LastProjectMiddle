@@ -30,9 +30,9 @@ class MessageController extends Controller
         $message = $this->messageService->readMessage($message);
 
         if ($message) {
-            return redirect()->route('admin.message.index')->with('success', 'Berhasil mengubah status pesan');
+            return redirect()->back()->with('success', 'Berhasil mengubah status pesan');
         } else {
-            return redirect()->route('admin.message.index')->with('error', 'Gagal mengubah status pesan');
+            return redirect()->back()->with('error', 'Gagal mengubah status pesan');
         }
     }
 
@@ -41,9 +41,9 @@ class MessageController extends Controller
         $message = $this->messageService->readAllMessage();
 
         if ($message) {
-            return redirect()->route('admin.message.index')->with('success', 'Berhasil mengubah status pesan');
+            return redirect()->route("admin.message.index")->with('success', 'Berhasil mengubah status pesan');
         } else {
-            return redirect()->route('admin.message.index')->with('error', 'Gagal mengubah status pesan');
+            return redirect()->route("admin.message.index")->with('error', 'Gagal mengubah status pesan');
         }
     }
 }

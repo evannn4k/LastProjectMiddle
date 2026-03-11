@@ -43,9 +43,9 @@ class UserController extends Controller
         $user = $this->userService->createUser($request->validated());
 
         if ($user) {
-            return redirect()->route('admin.user.index')->with('success', 'Berhasil menambah data pengguna');
+            return redirect()->back()->with('success', 'Berhasil menambah data pengguna');
         } else {
-            return redirect()->route('admin.user.index')->with('error', 'Gagal menambah data pengguna');
+            return redirect()->back()->with('error', 'Gagal menambah data pengguna');
         }
     }
 
@@ -73,9 +73,9 @@ class UserController extends Controller
         $user = $this->userService->updateUser($user, $request->validated());
 
         if ($user) {
-            return redirect()->route('admin.user.index')->with('success', 'Berhasil mengubah data pengguna');
+            return redirect()->back()->with('success', 'Berhasil mengubah data pengguna');
         } else {
-            return redirect()->route('admin.user.index')->with('error', 'Gagal mengubah data pengguna');
+            return redirect()->back()->with('error', 'Gagal mengubah data pengguna');
         }
     }
 
@@ -87,9 +87,9 @@ class UserController extends Controller
         $user = $this->userService->deleteUser($user);
 
         if ($user) {
-            return redirect()->route('admin.user.index')->with('success', 'Berhasil mengubah data pengguna');
+            return redirect()->route("admin.user.index")->with('success', 'Berhasil menghapus data pengguna');
         } else {
-            return redirect()->route('admin.user.index')->with('error', 'Gagal mengubah data pengguna');
+            return redirect()->route("admin.user.index")->with('error', 'Gagal menghapus data pengguna');
         }
     }
 }

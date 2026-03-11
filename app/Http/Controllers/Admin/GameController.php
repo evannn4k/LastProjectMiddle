@@ -105,9 +105,9 @@ class GameController extends Controller
         $game = $this->gameService->updateStatus($game);
 
         if ($game) {
-            return redirect()->back()->with('success', 'Berhasil mengubah status game');
+            return redirect()->route("admin.game.index")->with('success', 'Berhasil mengubah status game');
         } else {
-            return redirect()->back()->with('error', 'Gagal mengubah status game');
+            return redirect()->route("admin.game.index")->with('error', 'Gagal mengubah status game');
         }
     }
 }
