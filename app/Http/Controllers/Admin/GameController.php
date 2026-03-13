@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Game\GameCreateRequest;
-use App\Http\Requests\Admin\Game\GameStatusUpdateRequest;
 use App\Http\Requests\Admin\Game\GameUpdateRequest;
 use App\Models\Category;
 use App\Models\Game;
 use App\Service\Admin\GameService;
-use Illuminate\Http\Request;
 
 class GameController extends Controller
 {

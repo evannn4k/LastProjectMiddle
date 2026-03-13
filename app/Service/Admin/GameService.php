@@ -7,8 +7,6 @@ use App\Action\SaveImageAction;
 use App\Models\Game;
 use Illuminate\Support\Facades\Storage;
 
-use function PHPUnit\Framework\isEmpty;
-
 class GameService
 {
     /**

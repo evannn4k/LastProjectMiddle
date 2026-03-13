@@ -210,7 +210,6 @@
                                                 data-name="{{ $product->name }}" data-amount="{{ $product->amount }}"
                                                 data-price="{{ $product->price }}"
                                                 data-is_active="{{ $product->is_active }}"
-                                                data-stock="{{ $product->stock }}"
                                                 data-category_id="{{ $product->category_id }}"
                                                 data-modal-target="updateProduct" data-modal-toggle="updateProduct"
                                                 class="updateProduct flex w-full items-center py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-gray-700 dark:text-gray-200">
@@ -229,7 +228,6 @@
                                                 data-amount="{{ $product->amount }}"
                                                 data-price="Rp. {{ number_format($product->price, 0, ',', '.') }}"
                                                 data-is_active="{{ $product->is_active }}"
-                                                data-stock="{{ $product->stock }}"
                                                 data-category="{{ $product->category->name }}"
                                                 data-image="
                                                 @if (isset($product->image)) {{ asset('storage/images/product/' . $product->image) }} 
@@ -349,17 +347,6 @@
                             </tr>
                             <tr class="bg-neutral-primary border-b border-default">
                                 <td scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                                    Stock
-                                </td>
-                                <td class="py-4" style="width: 10px">
-                                    :
-                                </td>
-                                <td class="px-6 py-4 flex gap-2">
-                                    <div class="preview-stock"></div>
-                                </td>
-                            </tr>
-                            <tr class="bg-neutral-primary border-b border-default">
-                                <td scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
                                     Status
                                 </td>
                                 <td class="py-4" style="width: 10px">
@@ -412,7 +399,7 @@
                     @csrf
                     <input type="hidden" name="game_id" value="{{ $game->id }}">
                     <div class="grid gap-4 grid-cols-2 py-4 md:py-6">
-                        <div class="col-span-2 md:col-span-1">
+                        <div class="col-span-2">
                             <label for="name" class="block mb-2.5 text-sm font-medium text-heading">Nama</label>
                             <input type="text" name="name" id="name"
                                 class="
@@ -422,7 +409,7 @@
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
                             @enderror
                             block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="nama kategori">
+                                placeholder="nama produk">
                             @error('name')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
@@ -464,24 +451,6 @@
                                 w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Rp. 0">
                             @error('price')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
-                        <div class="col-span-2 md:col-span-1">
-                            <label for="stock" class="block mb-2.5 text-sm font-medium text-heading">Stok</label>
-                            <input type="number" name="stock" id="stock"
-                                class="
-                                @error('stock')
-                            bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                            @else
-                            bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                            @enderror
-                            block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="0">
-                            @error('stock')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
                                 </p>
@@ -635,7 +604,7 @@
                     @method('PUT')
                     <input type="hidden" name="game_id" value="{{ $game->id }}">
                     <div class="grid gap-4 grid-cols-2 py-4 md:py-6">
-                        <div class="col-span-2 md:col-span-1">
+                        <div class="col-span-2">
                             <label for="product_name_update"
                                 class="block mb-2.5 text-sm font-medium text-heading">Nama</label>
                             <input type="text" name="name" id="product_name_update"
@@ -646,7 +615,7 @@
                             bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
                             @enderror
                             block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="nama kategori">
+                                placeholder="nama produk">
                             @error('name')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
@@ -688,24 +657,6 @@
                                 w-full px-3 py-2.5 shadow-xs placeholder:text-body"
                                 placeholder="Rp. 0">
                             @error('price')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
-                        <div class="col-span-2 md:col-span-1">
-                            <label for="stock_update" class="block mb-2.5 text-sm font-medium text-heading">Stok</label>
-                            <input type="number" name="stock" id="stock_update"
-                                class="
-                                @error('stock')
-                            bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                            @else
-                            bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                            @enderror
-                            block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
-                                placeholder="0">
-                            @error('stock')
                                 <p class="mt-2.5 text-sm text-fg-danger-strong">
                                     {{ $message }}
                                 </p>
@@ -1060,7 +1011,6 @@
             document.getElementById("product_name_update").value = btn.dataset.name;
             document.getElementById("amount_update").value = btn.dataset.amount;
             document.getElementById("price_update").value = btn.dataset.price;
-            document.getElementById("stock_update").value = btn.dataset.stock;
 
             document.querySelectorAll(".option_category").forEach(option => {
                 if (option.value === btn.dataset.category_id) {
@@ -1088,7 +1038,6 @@
             document.querySelector(".preview-category").textContent = btn.dataset.category;
             document.querySelector(".preview-amount").textContent = btn.dataset.amount;
             document.querySelector(".preview-price").textContent = btn.dataset.price;
-            document.querySelector(".preview-stock").textContent = btn.dataset.stock;
             document.querySelector(".preview-status").textContent = btn.dataset.is_active === "1" ? "Aktif" :
                 "Non-Aktif";
             document.querySelector(".preview-created_at").textContent = btn.dataset.created_at;

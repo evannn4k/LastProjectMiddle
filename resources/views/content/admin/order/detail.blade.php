@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="p-4 sm:ml-64 mt-14 flex justify-center">
-        <div class="md:w-1/2 w-full bg-neutral-primary-soft shadow-xs roudend-lg border border-default">
+        <div class="md:w-1/2 w-full bg-neutral-primary-soft shadow-xs rounded-2xl border border-default">
 
             <div class="p-4 flex items-start justify-between space-x-4 border-b border-default">
                 <span class="text-2xl font-semibold">Detail Pesanan</span>

@@ -3,10 +3,11 @@
 @section('content')
     <div class="flex-1">
         <section class="bg-white dark:bg-gray-900">
-            <div class="mx-auto max-w-2xl py-8">
+            <div class="mx-auto max-w-2xl py-4 px-4 md:py-12 md:px-0">
                 <div class="border border-default rounded-3xl shadow p-6">
-                    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white text-center">Hubungi kami</h2>
-                    <form action="{{ route("message.store") }}" method="POST">
+                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Hubungi kami</h2>
+                    <p class="md:px-6 mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Mengalami masalah teknis? Ingin mengirimkan masukan tentang fitur beta? Membutuhkan detail tentang paket Bisnis kami? Beri tahu kami.</p>
+                    <form action="{{ route('message.store') }}" method="POST">
                         @csrf
                         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                             <div class="col-span-2">

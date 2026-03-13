@@ -108,7 +108,7 @@
                             d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
                     </svg>
 
-                    <span class="flex-1 ms-3 whitespace-nowrap">Pesanan</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap">Transaksi</span>
                 </a>
             </li>
 

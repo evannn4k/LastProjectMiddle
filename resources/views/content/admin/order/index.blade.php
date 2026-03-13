@@ -172,7 +172,7 @@
                             <tr>
                                 <td colspan="7"
                                     class="text-center bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium py-3">
-                                    Tidak ada data kategori</td>
+                                    Tidak ada data transaksi</td>
                             </tr>
                         @endforelse
                     </tbody>

@@ -22,14 +22,12 @@
             </div>
             <div class="p-4">
                 <div class="grid grid-cols-3 gap-4">
-                    <div class="col-span-3 md:col-span-1">
-                        <img src="{{ asset('storage/images/membership/' . $membership->image) }}"
-                            alt="{{ $membership->name }}" class="w-full h-auto rounded-base">
-                    </div>
-                    <div class="col-span-3 md:col-span-2 flex flex-col gap-4">
+                    <div class="col-span-3">
                         <h2 class="mb-2 text-xl font-semibold text-gray-900 md:text-2xl dark:text-white">
                             {{ $membership->name }}
                         </h2>
+                    </div>
+                    <div class="col-span-3 md:col-span-2 flex flex-col gap-4">
                         <div class="">
                             <div class="mb-2 font-semibold text-gray-900 dark:text-white">Detail</div>
                             <div
@@ -55,7 +53,7 @@
                                                 :
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ $membership->price }}
+                                                Rp.{{ number_format($membership->price, 0, ',', '.') }}
                                             </td>
                                         </tr>
                                         <tr class="bg-neutral-primary border-b border-default">
@@ -66,7 +64,7 @@
                                                 :
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ $membership->duration }}
+                                                {{ $membership->duration }} Hari
                                             </td>
                                         </tr>
                                         <tr class="bg-neutral-primary border-b border-default">
@@ -77,7 +75,7 @@
                                                 :
                                             </td>
                                             <td class="px-6 py-4">
-                                                {{ $membership->discount }}
+                                                {{ $membership->discount }}%
                                             </td>
                                         </tr>
                                         <tr class="bg-neutral-primary border-b border-default">
@@ -95,13 +93,15 @@
                                 </table>
                             </div>
                         </div>
-                        <div>
-                            <div class="mb-2 font-semibold text-gray-900 dark:text-white">Deskripsi</div>
-                            <div class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
-                                {{ $membership->description }}
-                            </div>
+                    </div>
+
+                    <div class="col-span-3 md:col-span-1">
+                        <div class="mb-2 font-semibold text-gray-900 dark:text-white">Deskripsi</div>
+                        <div class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
+                            {{ $membership->description }}
                         </div>
                     </div>
+
                     <div class="flex gap-3">
                         <button type="button" data-id="{{ $membership->id }}" data-name="{{ $membership->name }}"
                             data-description="{{ $membership->description }}" data-price="{{ $membership->price }}"
@@ -144,7 +144,7 @@
                     </h3>
                     <button type="button"
                         class="text-body bg-transparent hover:bg-neutral-tertiary hover:text-heading rounded-base text-sm w-9 h-9 ms-auto inline-flex justify-center items-center"
-                        data-modal-hide="create">
+                        data-modal-hide="update">
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                             fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -249,37 +249,6 @@
                                 </p>
                             @enderror
                         </div>
-
-                        <div class="col-span-2">
-                            <label for="image" class="block mb-2.5 text-sm font-medium text-heading">Gambar</label>
-
-                            <div class="flex items-center justify-center w-full">
-                                <label for="image"
-                                    class="flex flex-col items-center justify-center w-full h-64 @error('image')
-                            bg-danger-soft border border-danger-subtle text-fg-danger-strong text-sm rounded-base focus:ring-danger focus:border-danger
-                        @else
-                            bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand
-                            @enderror">
-                                    <div class="flex flex-col items-center justify-center text-body pt-5 pb-6">
-                                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2" />
-                                        </svg>
-                                        <p class="mb-2 text-sm"><span class="font-semibold">Click to upload</span> or drag
-                                            and drop</p>
-                                        <p class="text-xs">jepg,jpg,png,jfif,webp,gif,svg (MAX. 2040kb)</p>
-                                    </div>
-                                    <input id="image" name="image" type="file" class="hidden" />
-                                </label>
-                            </div>
-                            @error('image')
-                                <p class="mt-2.5 text-sm text-fg-danger-strong">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
                     </div>
 
                     <div class="flex items-center space-x-4 border-t border-default pt-4 md:pt-6">
@@ -294,7 +263,7 @@
                             </svg>
                             Tambah membership
                         </button>
-                        <button data-modal-hide="create" type="button"
+                        <button data-modal-hide="update" type="button"
                             class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Cancel</button>
                     </div>
                 </form>
