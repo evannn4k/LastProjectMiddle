@@ -24,9 +24,4 @@ class OrderController extends Controller
             return redirect()->away($url);
         }
     }
-
-    public function notification(Request $request)
-    {
-        $this->orderService->notification($request);
-    }
 }

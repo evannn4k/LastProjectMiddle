@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
+            $table->string("id_bill");
+            $table->string("invoice_number");
+            $table->string("link_url");
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->foreignId("membership_id")->constrained("memberships")->onDelete("cascade");
             $table->date("start_date");
             $table->date("end_date");
-            $table->enum("status", ["active", "nonactive", "pending"])->default("pending");
+            $table->string("status")->default("pending");
             $table->timestamps();
         });
     }

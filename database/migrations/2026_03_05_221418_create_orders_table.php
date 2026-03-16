@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("id_account");
             $table->string("quantity");
             $table->string("amount");
+            $table->string("discount")->nullable();
             $table->string("final_price");
             $table->string("status")->default("pending");
             $table->string("no")->nullable();

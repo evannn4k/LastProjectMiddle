@@ -28,7 +28,6 @@ class ProductCreateRequest extends FormRequest
             "price" => "required|numeric",
             "game_id" => "required|exists:games,id",
             "category_id" => "required|exists:categories,id",
-            "stock" => "required|numeric",
             "image" => "required|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048",
             "is_active" => "required|in:0,1"
         ];

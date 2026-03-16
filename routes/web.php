@@ -14,7 +14,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User\CheckTransactionsController;
 use App\Http\Controllers\User\HistoryController;
 use App\Http\Controllers\User\LandingPageController;
+use App\Http\Controllers\User\MembershipController;
 use App\Http\Controllers\User\MessageController as UserMessage;
+use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(LandingPageController::class)->group(function () {
@@ -52,6 +54,17 @@ Route::middleware('auth:user')
         Route::controller(HistoryController::class)->group(function () {
             Route::get('/history', 'history')->name('history');
             Route::get('/history/{order}', 'detail')->name('history.detail');
+        });
+
+        Route::controller(ProfileController::class)->group(function () {
+            Route::get('/profile', 'profile')->name('profile');
+            Route::put('/profile', 'update')->name('profile.update');
+            Route::delete('/account/delete', 'delete')->name('account.delete');
+        });
+
+        Route::controller(MembershipController::class)->group(function () {
+            Route::post('/membership/buy', 'buy')->name('membership.buy');
+            Route::delete('/membership/{subscription}', 'delete')->name('membership.delete');
         });
     });
 

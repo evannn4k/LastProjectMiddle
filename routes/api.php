@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\HandleCallback;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/user', function (Request $request) {
@@ -8,6 +8,6 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 
-Route::controller(OrderController::class)->group(function () {
-    Route::post('/payment/notification', 'notification');
+Route::controller(HandleCallback::class)->group(function () {
+    Route::post('/callback', 'callback');
 });

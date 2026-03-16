@@ -404,7 +404,7 @@
                                 <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
                                     d="M8 4h8v4H8V4Zm7 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                             </svg>
-                            Tambah membership
+                            Simpan Perubahan
                         </button>
                         <button data-modal-hide="update" type="button"
                             class="text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Cancel</button>

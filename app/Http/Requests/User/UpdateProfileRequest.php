@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Requests\Admin\Membership;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class MembershipUpdateRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return (Auth::guard('admin')->check()) ? true : false;
+        return (Auth::guard('user')->check()) ? true : false;
     }
 
     /**
@@ -24,10 +24,9 @@ class MembershipUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'duration' => 'required|numeric',
-            'discount' => 'required|numeric',
-            'description' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . Auth::guard("user")->user()->id,
+            'password' => 'nullable|min:8|confirmed',
+            'phone' => 'nullable|string|max:20',
         ];
     }
 }

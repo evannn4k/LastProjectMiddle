@@ -95,6 +95,15 @@
                                             ×{{ $order->quantity }}
                                         </div>
                                     </div>
+                                    <div class="flex items-center justify-between gap-4 py-3">
+                                        @if ($order->discount > 0)
+                                            <div class="text-base font-normal text-gray-500 dark:text-gray-400">Potongan
+                                            </div>
+                                            <div class="text-base font-medium text-gray-900 dark:text-white">
+                                                {{ $order->discount }}%
+                                            </div>
+                                        @endif
+                                    </div>
                                     <div class="flex items-center justify-between gap-4 py-3 border-t border-default">
                                         <div class="text-base font-bold text-gray-900 dark:text-white">Total Pembayaran
                                         </div>

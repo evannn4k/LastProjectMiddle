@@ -27,9 +27,8 @@ class ProductUpdateRequest extends FormRequest
             "amount" => "required|numeric",
             "price" => "required|numeric",
             "category_id" => "required|exists:categories,id",
-            "stock" => "required|numeric",
             "image" => "nullable|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048",
             "is_active" => "required|in:0,1"
         ];
     }
-}
+} 

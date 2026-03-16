@@ -92,7 +92,7 @@
                                         {{ $order->created_at }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        {{ Str::mask($order->invoice_number, '*', 4, 12) }}
+                                        {{ Str::mask($order->invoice_number, '*', 4, 15) }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $order->product->name ?? $order->product->amount . ' ' . $order->product->category->name }}

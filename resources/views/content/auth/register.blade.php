@@ -5,7 +5,7 @@
         <div class="h-screen flex justify-center items-center">
 
             <div class="shadow-2xl p-5 rounded-2xl md:w-2/7">
-                <h3 class="mt-4 mb-6 text-center text-2xl font-bold">Login</h3>
+                <h3 class="mt-4 mb-6 text-center text-2xl font-bold">Register</h3>
                 <form class="mx-auto" action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="mb-5">

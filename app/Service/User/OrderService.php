@@ -4,18 +4,27 @@ namespace App\Service\User;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class OrderService
 {
-     public function create(array $data)
+    public function create(array $data)
     {
         $product = Product::findOrFail($data["product_id"]);
         $nameProduct = $product->name ?? $product->amount . $product->category->name;
-
-        $invoice_number = 'INV-' . time() . rand(100, 999);
+        $invoice_number = 'INV-ORD-' . time() . rand(100, 999);
         $title = $nameProduct . " " . $product->game->name . " " . $invoice_number;
-        $finalPrice = $product->price * $data["quantity"];
+
+        $user = User::with("subscription.membership")->find(Auth::guard("user")->user()->id);
+
+        $price = $product->price;
+
+        if ($user->subscription && $user->subscription->status == 'successful') {
+            $price = $price - ($product->price * $user->subscription->membership->discount / 100);
+        }
+
+        $finalPrice = $price * $data["quantity"];
 
         $secret_key = "Basic " . base64_encode(config('services.flip.secret') . ":");
 
@@ -59,6 +68,7 @@ class OrderService
         $data["invoice_number"] = $invoice_number;
         $data["amount"] = $product->amount . " " . $product->category->name;
         $data["status"] = "pending";
+        $data["discount"] = $user->subscription->membership->discount ?? null;
         $data["final_price"] = $finalPrice;
 
         Order::create($data);
@@ -66,18 +76,5 @@ class OrderService
         $url = "https://" . $bill->link_url;
 
         return $url;
-    }
-
-    public function notification($request)
-    {
-        $response = $request->data;
-        $data = json_decode($response); 
-
-        $order = Order::where("id_bill", $data->bill_link_id)->first();
-
-        if ($order && $order->status == "pending") {
-            $order->status = strtolower($data->status);
-            $order->save();
-        }
     }
 }

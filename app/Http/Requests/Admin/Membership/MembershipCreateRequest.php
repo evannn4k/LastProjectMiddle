@@ -28,7 +28,6 @@ class MembershipCreateRequest extends FormRequest
             'duration' => 'required|numeric',
             'discount' => 'required|numeric',
             'description' => 'required|string',
-            "image" => "required|image|mimes:jpeg,jpg,png,jfif,webp,gif,svg|max:2048",
         ];
     }
 }

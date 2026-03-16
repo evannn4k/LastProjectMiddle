@@ -100,9 +100,12 @@
                                         @foreach ($category->product as $product)
                                             <li class="h-full">
                                                 <input type="radio" id="{{ $product->id }}" value="{{ $product->id }}"
-                                                    name="product_id" class="hidden peer" required="">
-                                                <label for="{{ $product->id }}"
-                                                    class="h-full inline-flex items-start justify-between w-full p-3 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer  peer-checked:hover:bg-brand-softer peer-checked:border-brand-subtle peer-checked:bg-brand-softer hover:bg-neutral-secondary-medium peer-checked:text-fg-brand-strong">
+                                                    name="product_id" class="hidden peer" required>
+                                                <label data-price="Rp.{{ number_format($product->price, 0, ',', '.') }}"
+                                                    data-discount="{{ $discount }}"
+                                                    data-final-price="Rp.{{ number_format($product->price - ($product->price * $discount) / 100, 0, ',', '.') }}"
+                                                    for="{{ $product->id }}"
+                                                    class="product h-full inline-flex items-start justify-between w-full p-3 text-body bg-neutral-primary-soft border-1 border-default rounded-base cursor-pointer  peer-checked:hover:bg-brand-softer peer-checked:border-brand-subtle peer-checked:bg-brand-softer hover:bg-neutral-secondary-medium peer-checked:text-fg-brand-strong">
                                                     <div class="w-full flex justify-between items-center gap-2">
                                                         <div class="">
                                                             <div class="w-full font-semibold text-sm text-dark mb-2">
@@ -175,17 +178,30 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="sticky bottom-0 p-4 bg-gradient-to-t from-white to-white/0 flex">
-                            <button type="submit"
-                                class="w-full text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none flex justify-center items-center gap-2"><svg
-                                    class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
-                                    height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4" />
-                                </svg>
-                                Beli
-                                Sekarang</button>
+                        <div class="hidden sticky bottom-0 pb-3" id="order_summary">
+                            <div class="p-4 bg-white flex justify-between items-center shadow-2xl border border-default rounded-lg">
+                                <div class="flex flex-col">
+                                    <div class="flex items-center gap-2 hidden" id="discount_container">
+                                        <span class="font-base text-sm line-through text-gray-500" id="real_price">
+                                        </span>
+                                        <span
+                                            class="bg-danger-soft border border-danger-subtle text-fg-danger-strong text-xs font-medium px-1.5 py-0.5 rounded-full"
+                                            id="discount"></span>
+                                    </div>
+                                    <span class="font-bold text-xl text-red-600" id="final_price">
+                                    </span>
+                                </div>
+                                <button type="submit"
+                                    class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-full text-sm px-4 py-2.5 focus:outline-none flex justify-center items-center gap-2"><svg
+                                        class="" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4" />
+                                    </svg>
+                                    Beli
+                                    Sekarang</button>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -193,3 +209,23 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        document.addEventListener("click", function(e) {
+            const button = e.target.closest(".product");
+            if (!button) return;
+
+            document.getElementById("order_summary").classList.remove("hidden");
+
+            console.log(button.dataset.discount);
+
+            if (button.dataset.discount > 0) {
+                document.getElementById("discount_container").classList.remove("hidden");
+            }
+            document.getElementById("discount").textContent = `${button.dataset.discount}%`;
+            document.getElementById("real_price").textContent = button.dataset.price;
+            document.getElementById("final_price").textContent = button.dataset.finalPrice;
+
+        });
+    </script>
+@endpush
