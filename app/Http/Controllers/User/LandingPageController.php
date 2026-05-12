@@ -16,7 +16,7 @@ class LandingPageController extends Controller
     {
         $memberships = Membership::all();
         $games = Game::where('is_active', true)->get();
-        $user = Auth::guard("user")->check() ? User::find(Auth::guard("user")->user()->id) : null;
+        $user = Auth::guard('user')->check() ? User::find(Auth::guard('user')->user()->id) : null;
 
         return view('content.user.index', compact('games', 'memberships', 'user'));
     }
@@ -33,8 +33,8 @@ class LandingPageController extends Controller
 
         $discount = 0;
 
-        if (Auth::guard("user")->check()) {
-            $user = User::find(Auth::guard("user")->user()->id);
+        if (Auth::guard('user')->check()) {
+            $user = User::find(Auth::guard('user')->user()->id);
             if (Subscription::where('user_id', $user->id)->exists()) {
                 $discount = $user->subscription->membership->discount;
             }

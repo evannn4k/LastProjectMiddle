@@ -12,27 +12,23 @@ class GenerateSlugAction
     public function generate($data, $model, $id = null)
     {
         $slug = null;
+        $originalSlug = Str::slug($data);
+        $slug = $originalSlug;
+        $counter = 1;
 
         if ($id) {
-            $originalSlug = Str::slug($data);
-            $slug = $originalSlug;
-            $counter = 1;
-
-            while ($model::where("slug", $originalSlug)->where("id", "!=", $id)->exists()) {
-                $slug = $originalSlug . "-" . $counter;
+            while ($model::where('slug', $slug)->where('id', '!=', $id)->exists()) {
+                $slug = $originalSlug.'-'.$counter;
                 $counter++;
             }
         } else {
-            $originalSlug = Str::slug($data);
-            $slug = $originalSlug;
-            $counter = 1;
-
-            while ($model::where("slug", $originalSlug)->exists()) {
-                $slug = $originalSlug . "-" . $counter;
+            while ($model::where('slug', $slug)->exists()) {
+                $slug = $originalSlug.'-'.$counter;
                 $counter++;
             }
         }
 
         return $slug;
+
     }
 }
